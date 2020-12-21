@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    {{ message }}
+    <h2 v-once> {{ message }}</h2>  <!--  v-once 指令第一次声明后，后面哪怕变量值变更, 比如叜consle 控制台更改变量值，也不会动态加载新的值 -->
+  </div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!"
+    }
+  })
+</script>  
+</body>
+</html>

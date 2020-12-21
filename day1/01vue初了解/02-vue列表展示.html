@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+<div id="app">
+
+  {{ movies }}
+
+  <!-- 方法1： -->
+  <!-- 使用原始写法：从列表中根据索引一个一个取值； -->
+  <!-- 但是如果 变量 movies 的值动态发生变化，这里需要再修改代码进行补充，如果用法二就不用； -->
+  <ul>
+    <li>{{movies[0]}}</li>
+    <li>{{movies[1]}}</li>
+    <li>{{movies[2]}}</li>
+    <li>{{movies[3]}}</li>
+  </ul>
+
+<!-- 方法2： -->
+<!-- 使用 vue 内置关键字方法  v-for -->
+<ul style="background-color: brown;">
+  <li v-for="item in movies" >{{item}}</li>
+</ul>
+
+</div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message: "你好啊！",
+      movies: ['星际穿越', '大话西游', '少年派', '盗梦空间']
+    }
+  })
+
+</script>
+</body>
+</html>
