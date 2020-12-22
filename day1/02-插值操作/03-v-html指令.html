@@ -8,8 +8,9 @@
 <body>
 
   <div id='app'>
-    {{ message }}
-    <h2 v-once> {{ message }}</h2>  <!--  v-once 指令第一次声明后，后面哪怕变量值变更, 比如在 consle 控制台更改变量值，也不会动态加载新的值 -->
+    <!-- {{ message }} -->
+    <h2>{{url}}</h2>
+    <h2 v-html='url'></h2>
   </div>
 
 <script src="../../js/vue.js"></script>
@@ -17,7 +18,8 @@
   const app = new Vue({
     el: '#app',
     data:{
-      message:"hello, world!"
+      message:"hello, world!",
+      url: "<a href='http://wwww.baidu.com'>百度一下</a>"
     }
   })
 </script>  

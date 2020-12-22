@@ -8,8 +8,10 @@
 <body>
 
   <div id='app'>
-    {{ message }}
-    <h2 v-once> {{ message }}</h2>  <!--  v-once 指令第一次声明后，后面哪怕变量值变更, 比如在 consle 控制台更改变量值，也不会动态加载新的值 -->
+    <h2> {{ message }}</h2>
+    <!-- 当使用 v-text 后，会将元素定义的其他内容覆盖掉！ 所以该方法很少使用-->
+    <h2 v-text='message'>你好啊！</h2>
+
   </div>
 
 <script src="../../js/vue.js"></script>
