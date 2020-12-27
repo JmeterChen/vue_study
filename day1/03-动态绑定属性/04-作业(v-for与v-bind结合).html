@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- 作业要求：
+  1、在页面上展示列举的一些电影名称；
+  2、第一个电影名一直保持为红色；
+  3、只有当点击其他电影名的时候会变成红色； -->
+
+  <div id='app'>
+    <ul>
+      <li v-for="(item, index) in movies" @click="activeIndex=index" :class="isClick(index)" >{{item}}</li>
+    </ul>
+  </div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data:{
+      movies:["海王", "海尔兄弟", "火影忍者", "七龙珠", "海贼王"],
+      activeIndex:0
+    },
+    methods:{
+      isClick:function(index){
+        if(index==0){
+          return {active:true}
+        }else if (this.activeIndex == index){
+          return {active:true}
+        }else
+        return {active:false}
+      }
+    }
+  })
+</script>  
+</body>
+</html>

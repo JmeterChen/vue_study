@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    .active{
+      color: red;
+    }
+    .active2{
+      color: red;
+    }
+  </style>
+</head>
+<body>
+
+  <div id='app'>
+    <!-- <h2 class="active">{{ message }}</h2>
+    <h2 :class="active">{{message}}</h2> -->
+    <h2 :class="{active:isActive, line:isLine}">{{message}}</h2>
+    <button v-on:click="btnClick()">点击我可以切换颜色</button> </br>
+
+    <!-- 可以把很长的属性放在一个方法里定义，通过调用这个方法进行返回； -->
+    <h2 :class="getClass()">{{message}}</h2>  
+    <button v-on:click="btnClick2()">点击我可以切换颜色</button>
+  </div>
+
+<script src="../../js/vue.js"></script>
+<script>
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      // active: "active"
+      isActive:true,
+      isLine:true,
+      isActive2:true,
+      isLine2:true
+    },
+    methods:{
+      btnClick: function(){ 
+        console.log("点击后颜色属性:", this.isActive)
+        this.isActive = !this.isActive
+        console.log("点击后颜色属性:", this.isActive)
+      },
+      btnClick2: function(){ 
+        console.log("点击后颜色属性:", this.isActive2)
+        this.isActive2 = !this.isActive2
+        console.log("点击后颜色属性:", this.isActive2)
+      },
+      getClass: function(){
+        return {active2: this.isActive2, line2:this.isLine2}
+      }
+    }
+  })
+</script>  
+</body>
+</html>
