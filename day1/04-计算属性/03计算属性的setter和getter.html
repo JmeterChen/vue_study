@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    {{ message }}
+    <h2>{{ fullname }} </h2> 
+  </div>
+
+<script src="../../js/vue.js"></script>
+<script> 
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100
+    },
+    computed :{
+      // 完整写法
+      fullname :{
+        set: function(){
+
+        },
+        // 一般只用只读属性
+        get: function(){
+            return this.firstName + " " + this.lastName
+        }
+      }
+      // 简洁写法
+      // fullname: function(){
+      //   return this.firstName + " " + this.lastName
+      // }
+    }
+  })
+</script>  
+</body>
+</html> 
