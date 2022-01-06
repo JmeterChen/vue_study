@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    {{ message }}
+    <h2>{{firstName + ' ' + lastName}}</h2>
+    <!-- 1.事件调用的方法没有参数, 方法调用时可以加括号也可以省略不写-->
+    <button @click='btn1Click()'>按钮1</button>
+    <button @click='btn2Click'>按钮2</button>
+
+
+    <!-- 2.事件调用的方法时省略了括号，但是方法本身定义的时候是有定义形参的，这个时候Vue会将浏览器产生的event事件对象作为参数传入到方法-->
+    <button @click='btn3Click'>按钮3</button>
+
+    <!-- 3.事件调用时，我们既需要 event 对象也需要其他参数怎么传入-->
+    <!-- 在调用方法时，如何获取浏览器参数的 event 对象， 使用$event 即可 -->
+    <button @click='btn4Click(message, $event)'>按钮4</button>
+  </div>
+
+<script src="../../js/vue.js"></script>
+<script> 
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+    },
+    methods: {
+        btn1Click(){
+            console.log("这是按钮1")
+        },
+        btn2Click(){
+            console.log("这是按钮2")
+        },
+        btn3Click(param){
+            console.log("这是按钮3的形参:", param)  // 会把 event 事件对象打印出来 PointerEvent {isTrusted: true, pointerId: 1, width: 1, height: 1, pressure: 0, …}
+        },
+        btn4Click(param1, param2){
+            console.log("这是按钮3的形参:", param1)  // 会把 event 事件对象打印出来 PointerEvent {isTrusted: true, pointerId: 1, width: 1, height: 1, pressure: 0, …}
+            console.log("这是event 对象:", param2)
+        }
+    },
+  })
+</script>  
+</body>
+</html>
