@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <div id='app'>
+    <div v-if="books.length >= 1">
+      <table border="1">
+        <thead>
+          <tr>
+            <th>编号</th>
+            <th>书名</th>
+            <th>单价</th>
+            <th>数量</th>
+            <th>操作</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr v-for='(book, index) in books'>
+            <td>{{ book.id }}</td>
+            <td>{{ book.name }}</td>
+            <td>{{ book.price | getFinallPrice }}</td>
+            <td>
+              <button @click="deNums(index)" :disabled="book.nums <= 1">-</button>
+              {{ book.nums }}
+              <button @click="inNums(index)">+</button>
+            </td>
+            <td>
+              <button @click="remove">移除</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <h3>总价： {{ allPrice | getFinallPrice}}</h3>
+    </div>
+    <div v-else>
+      <h3>购物车中无商品，请添加商品！</h3>
+    </div>
+  </div>
+  
+<script src="../../js/vue.js"></script>
+<script src="main.js"></script>
+</body>
+</html>

@@ -11,6 +11,14 @@
     {{ message }}
     <h2>{{firstName + ' ' + lastName}}</h2>
     <h2>{{counter * 2}}</h2>
+    <!-- 1. v-for遍历数组 不使用索引值-->
+    <ul>
+      <li v-for='item in names'> {{item}}</li>
+    </ul>
+    <!-- 2. v-for遍历数组 使用索引值-->
+    <ul>
+      <li v-for='(item, index) in names'>{{index + 1}} {{item}}</li>
+    </ul>
   </div>
 
 <script src="../../js/vue.js"></script>
@@ -21,12 +29,8 @@
       message:"hello, world!",
       firstName: 'Kobe',
       lastName: 'Bryant',
-      counter: 100
-    },
-    methods:{
-      test(){
-        console.log("test_log!")
-      }
+      counter: 100,
+      names:["kobe", 'james', 'curry']
     }
   })
 </script>  

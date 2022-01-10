@@ -8,9 +8,15 @@
 <body>
 
   <div id='app'>
-    {{ message }}
-    <h2>{{firstName + ' ' + lastName}}</h2>
-    <h2>{{counter * 2}}</h2>
+    <span v-if='isUser'>
+      <label for="user">账号登录:</label>
+      <input type="text" name="" id="user">
+    </span>
+    <span v-else>
+      <label for="email">邮箱登录:</label>
+      <input type="text" name="" id="email">
+    </span>
+    <button @click='btnClick'>切换登录类型</button>
   </div>
 
 <script src="../../js/vue.js"></script>
@@ -21,11 +27,12 @@
       message:"hello, world!",
       firstName: 'Kobe',
       lastName: 'Bryant',
-      counter: 100
+      counter: 100,
+      isUser: true
     },
     methods:{
-      test(){
-        console.log("test_log!")
+      btnClick(){
+        this.isUser = !this.isUser
       }
     }
   })

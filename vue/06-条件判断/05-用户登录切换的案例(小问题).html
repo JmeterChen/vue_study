@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    <span v-if='isUser'>
+      <label for="user">账号登录:</label>
+      <!-- 在input元素里面加上 不同的key 切换类型后，input中的内容会清空 -->
+      <input type="text" name="" id="user" key='user'>
+    </span>
+    <span v-else>
+      <label for="email">邮箱登录:</label>
+      <input type="text" name="" id="email" key='user'>
+    </span>
+    <button @click='btnClick'>切换登录类型</button>
+  </div>
+
+<script src="../../js/vue.js"></script> 
+<script> 
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100,
+      isUser: true
+    },
+    methods:{
+      btnClick(){
+        this.isUser = !this.isUser
+      }
+    }
+  })
+</script>  
+</body>
+</html>
