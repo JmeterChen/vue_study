@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    {{ message }}
+    <h2>{{firstName + ' ' + lastName}}</h2>
+    <!--当存在双向绑定的时候，我们有时候不希望频繁更新数据，而是希望当更改完数据后 鼠标失去hover 或者 点击enter 键才更新 -->
+    <!-- 1. 这里我们就可以使用修饰符 .lazy 实现 -->
+    <input type="text"  v-model.lazy="res">  
+    <h2>{{res}}</h2>
+
+
+    <!--当存在双向绑定的时候，自动会把数据类型指定为 字符串，但是比如我们输入数字的时候那么使用时就需要转为number类型才能使用 -->
+    <!-- 2. 这里我们就可以使用修饰符 .number 实现，就不用额外再去转换类型 -->
+    <input type="text"  v-model.number="age">  
+    <h2> {{age}} -- {{ typeof(age)}}</h2>
+
+
+    <!--当存在双向绑定的时候，自动会把数据类型指定为 字符串，但是比如我们输入数字的时候那么使用时就需要转为number类型才能使用 -->
+    <!-- 2. 这里我们就可以使用修饰符 .number 实现，就不用额外再去转换类型 -->
+    <input type="text"  v-model.number="age">  
+    <h2> {{age}} -- {{ typeof(age)}}</h2>
+
+    <!--当存在双向绑定的时候，输入很多空格的时候，希望自动把空格去掉 -->
+    <!-- 2. 这里我们就可以使用修饰符 .trim 实现，就不用额外再去处理 -->
+    <input type="text"  v-model.trim="name">  
+    <h2> {{name}} -- {{name.length}} </h2>
+    
+  </div>
+
+<script src="../../js/vue.js"></script>
+<script> 
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100,
+      res: "",
+      age: "",
+      name: ""
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      }
+    }
+  })
+</script>  
+</body>
+</html>

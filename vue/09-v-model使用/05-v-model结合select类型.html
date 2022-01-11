@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    {{ message }}
+    <h2>{{firstName + ' ' + lastName}}</h2>
+    <!-- 1.单项选择 -->
+    <select name="abc" id="" @change="onChange" v-model="selected_people">
+        <option value="Kobe">科比</option>
+        <option value="James">詹姆斯</option>
+        <option value="Wade">韦德</option>
+        <option value="Paul">保罗</option>
+    </select>
+    <h2>你当前选择的球星是:{{selected_people}}</h2>
+
+    <!-- 2.多项选择 使用 multiple 属性就可以支持多选-->
+    <select name="abc" id="" @change="onChange" v-model="selected_peoples" multiple>
+        <option value="Kobe">科比</option>
+        <option value="James">詹姆斯</option>
+        <option value="Wade">韦德</option>
+        <option value="Paul">保罗</option>
+    </select>
+    <h2>你当前选择的球星是:{{selected_peoples}}</h2>
+  </div>
+
+<script src="../../js/vue.js"></script>
+<script> 
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100,
+      selected_people: "Kobe",
+      selected_peoples: []
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      },
+      onChange(){
+          console.log(event.target.value)
+      }
+    }
+  })
+</script>  
+</body>
+</html>
