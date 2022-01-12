@@ -1,0 +1,64 @@
+<!-- 需求：把前面所讲的计数器 用组件的方式实现，并且页面中存在多个计数器！ -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+  </div>
+  
+  <template id="computer">
+    <!-- 这个div 是必须要写的 暂时还不知道为什么，如果去掉会报错！！！ -->
+    <div> 
+      <h2>计数为：{{ total }}</h2>
+      <button @click="add">+</button>
+      <button @click="dec">-</button>
+    </div>
+  </template>
+
+<script src="../../js/vue.js"></script>
+<script> 
+
+  Vue.component('cpn', {
+    template: '#computer',
+    // 如果这里的data 不是一个函数，那么所有的组件就是共享的同一个对象，那么数据就不会隔离也会同步变更，就没起到组件化的作用！
+    data(){
+      return {
+        total: 0
+      }
+    },
+    methods:{
+      dec(){
+        this.total--
+      },
+      add(){
+        this.total++
+      }
+    }
+  })
+
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      }
+    }
+  })
+</script>  
+</body>
+</html>

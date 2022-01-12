@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    <h1>下面是使用组件的效果</h1>
+    <!-- 第三步 使用组件 -->
+      <mycpm></mycpm>
+      <mycpm2></mycpm2>
+
+  </div>
+
+<script src="../../js/vue.js"></script>
+<script> 
+
+  const cpmc = Vue.extend({
+    
+  })
+
+  // 使用语法糖写法把创建组件构造器和注册组件合二为一
+  // 显然这种写法是注册的全局组件，想要注册局部组件也需要在 vue 实例内部去定义
+  Vue.component('mycpm', {
+      template : `
+      <div>
+        <h2>我是语法糖注册的全局组件</h2>
+        <p>我的内容1哈哈哈哈哈哈哈</p>
+        <p>我的内容2嘻嘻嘻嘻嘻嘻嘻</p>
+      </div>
+      `
+  })
+
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      }
+    },
+    components:{
+      "mycpm2": {
+        template :
+        `<div>
+          <h2>我是语法糖注册的局部组件</h2>
+          <p>我的内容1哈哈哈哈哈哈哈</p>
+          <p>我的内容2嘻嘻嘻嘻嘻嘻嘻</p>
+          </div>`
+      }
+    }
+  })
+</script>  
+</body>
+</html>

@@ -16,7 +16,7 @@
 <script src="../../js/vue.js"></script>
 <script> 
 
-    // 创建第一个组件构造器对象
+    // 创建第一个组件构造器对象 （子组件）
     const mycpn1 = Vue.extend({
         template:`    
         <div>
@@ -25,7 +25,7 @@
         </div>`
     })
 
-    // 创建第二个组件构造器对象
+    // 创建第二个组件构造器对象 （父组件）
     const mycpn2 = Vue.extend({
         template:`    
         <div>
@@ -37,7 +37,7 @@
             cpn1: mycpn1,
         }
     })
-
+  // root 组件
   const app = new Vue({
     el: '#app',
     data:{

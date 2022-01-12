@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    <mycpn :cbooks=books></mycpn>
+  </div>
+
+  <template id="cpn">
+    <ul>
+      <li v-for="(book, index) in cbooks"> {{index}} -- {{book}}</li>
+    </ul>
+  </template>
+  
+<script src="../../js/vue.js"></script>
+<script> 
+
+  const mycpn = {
+    template : "#cpn",
+    // 写法1：props 值类型为数组
+    props:["cbooks"]
+  }
+
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100,
+      books:["kobe自传", "james自传", "Python自传", "Java自传"]
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      }
+    },
+    components:{
+      mycpn,
+    }
+  })
+</script>  
+</body>
+</html>
