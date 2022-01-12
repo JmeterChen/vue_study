@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    {{ message }}
+    <!-- <cpn1></cpn1> -->
+    <cpn2></cpn2>
+  </div>
+
+<script src="../../js/vue.js"></script>
+<script> 
+
+    // 创建第一个组件构造器对象
+    const mycpn1 = Vue.extend({
+        template:`    
+        <div>
+            <h2>我是标题1</h2>
+            <p>我是内容哈哈哈哈哈</p>
+        </div>`
+    })
+
+    // 创建第二个组件构造器对象
+    const mycpn2 = Vue.extend({
+        template:`    
+        <div>
+            <cpn1></cpn1>
+            <h2>我是标题2</h2>
+            <p>我是内容嘿嘿嘿嘿</p>
+        </div>`,
+        components:{
+            cpn1: mycpn1,
+        }
+    })
+
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      }
+    },
+    components:{
+        // cpn1: mycpn1,     我们把组件1 注册放到 组件2 构造器对象里面去进行,然后在组件2 中就可以直接使用组件1了  这样最终的组件2 使用时其实包含了两个组件（组件1和组件2）
+        cpn2: mycpn2,
+    }
+  })
+</script>  
+</body>
+</html>
