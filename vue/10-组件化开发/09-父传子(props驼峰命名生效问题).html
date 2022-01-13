@@ -8,17 +8,15 @@
 <body>
 
   <div id='app'>
-    <!-- <mycpn :cbooks="nums"></mycpn> -->
-    <mycpn :childnums='nums' :mes="message" :cbooks="books"></mycpn>
+    <!-- 如果props 中接受父组件数据的变量是驼峰命名的话需要将驼峰命名拆开 child-nums-->
+    <mycpn :child-nums='nums' :c-message=message></mycpn>
   </div>
 
   <template id="cpn">
     <ul>
-      <h2>{{mes}}</h2>
+      <h2>{{cMessage}}</h2>
       <!-- <li v-for="(book, index) in cbooks"> {{index}} -- {{book}}</li> -->
-      <li v-for="(n, index) in childnums"> {{index}} --号码: {{n}}</li>
-      <h2>{{mes2}}</h2>
-      <li v-for="(book, index) in cbooks"> {{index}} -- {{book}}</li>
+      <li v-for="(n, index) in childNums"> {{index}} --号码: {{n}}</li>
     </ul>
   </template>
   
@@ -30,28 +28,16 @@
     // 写法1：props 值类型为数组
     // props:["cbooks"]
 
+
     //  写法2：props 值类型最常见的是对象
     props:{
       //  注意点1 子组件接受父组件数据的变量 不能用驼峰命名，不然没有效果，原因暂时未知！ 坑！！！！！
-      childnums: Array,   
-
-      //  另外一种对象声明写法：
-      mes: {
+      childNums: Array,   
+      cMessage: {
         type: String,
         default: "hello chenbolin",
         required: true    //  注意点2: 有了该参数，那么子组件做中一定需要传值，不然会报错
       },
-      mes2: {
-        type: String,
-        default: "hello chenbolin",  // 注意点3: 当父组件未传值时，默认会用该值
-      },
-      // 注意点4：如果类型是对象或者数组，默认值必须是一个函数返回
-      cbooks:{
-        type: Array,
-        default(){
-          return []
-        }
-      }
     }
   }
 
