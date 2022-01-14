@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    <mycpn @tofartherclick="fartherclick"></mycpn>
+  </div>
+
+  <template id="cpnn">
+    <div>
+      <button v-for="item in catagorys" @click="itemclick(item)">{{item.name}}</button>
+    </div>
+  </template>
+
+<script src="../../js/vue.js"></script>
+<script> 
+
+  const mycpn = {
+    template: "#cpnn",
+    data(){
+      return {
+        catagorys: [
+          {id:1, name: "数码科技"},
+          {id:2, name: "海鲜水果"},
+          {id:3, name: "家用家电"},
+          {id:4, name: "厨房厨具"},
+        ]
+      }
+    },
+    methods:{
+      itemclick(item){
+        console.log("itemclick:", item)
+        this.$emit("tofartherclick", item)
+      }
+    }
+  }
+
+  const app = new Vue({
+    el: '#app',
+    data:{
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      },
+      fartherclick(farItem){
+        console.log("tofartherclick:", farItem)
+      }
+    },
+    components:{
+      mycpn
+    }
+  })
+</script>  
+</body>
+</html>
