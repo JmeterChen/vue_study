@@ -7,10 +7,12 @@
 </head>
 <body>
 
+  <!-- 父组件模板 -->
   <div id='app'>
     <mycpn @tofartherclick="fartherclick"></mycpn>
   </div>
 
+  <!--子组件模板 -->
   <template id="cpnn">
     <div>
       <button v-for="item in catagorys" @click="itemclick(item)">{{item.name}}</button>
@@ -35,6 +37,7 @@
     methods:{
       itemclick(item){
         console.log("itemclick:", item)
+        // 发射事件：自定义事件
         this.$emit("tofartherclick", item)
       }
     }

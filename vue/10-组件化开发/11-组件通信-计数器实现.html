@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    <cpn @updatenums='updatenums' :ccounter='counter'></cpn>
+  </div>
+
+  <template id="mycpn">
+      <div>
+          <h2>当前计数为: {{ ccounter }}</h2>
+          <button @click="add">+</button>
+          <button @click="incre">-</button>
+      </div>
+  </template>
+  
+<script src="../../js/vue.js"></script>
+<script> 
+
+  const cpn = {
+      template: "#mycpn",
+      props: {
+        ccounter:{
+            type: Number,
+            default: 0
+        }
+      },
+      data(){
+          return {
+              total: 0
+          }
+      },
+      methods: {
+        add(){
+            this.total++
+            this.$emit("updatenums", this.total)
+        },
+        incre(){
+            this.total--
+            this.$emit("updatenums", this.total)
+        }
+      },
+  }
+
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 0
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      },
+      updatenums(num){
+          console.log("父接受子传过来的最新数字为:", num)
+          this.counter = num
+      }
+    },
+    components:{
+        cpn
+    }
+  })
+</script>  
+</body>
+</html>
