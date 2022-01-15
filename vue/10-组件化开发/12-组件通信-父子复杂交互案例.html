@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+		<cpn :numbers1=num1 :numbers2=num2 @changenum1tofar='changenum1tofar' @changenum2tofar='changenum2tofar'>
+  </div>
+
+	<template id="mycpn">
+		<div>
+			<h2> props: {{cnumbers1}}</h2>
+			<h2> 父组件: data-num1: {{numbers1}}</h2>
+			请输入数字1: <input type="text" :value="cnumbers1" @input="changenum1">
+			<h2> props: {{cnumbers2}}</h2>
+			<h2> 父组件: data-num2: {{numbers2}}</h2>
+			请输入数字2: <input type="text" :value="cnumbers2" @input="changenum2">
+		</div>
+	</template>
+
+<script src="../../js/vue.js"></script>
+<script> 
+
+	const cpn = {
+		template: "#mycpn",
+		props:{
+			numbers1:{
+				type: Number,
+				default:0
+			},
+			numbers2:{
+				type: Number,
+				default: 1
+			}
+		},
+		data(){
+			return{
+				cnumbers1: this.numbers1,
+				cnumbers2: this.numbers2,
+			}
+		},
+		methods: {
+			changenum1(event){
+				console.log("changenum1:", event.target.value)
+				this.cnumbers1 = parseInt(event.target.value)
+				this.$emit('changenum1tofar', this.cnumbers1)
+				this.cnumbers2 = this.cnumbers1 * 100
+				this.$emit('changenum2tofar', this.cnumbers2)
+			},
+			changenum2(event){
+				console.log("changenum2:", event.target.value)
+				this.cnumbers2 =  parseInt(event.target.value)
+				this.$emit('changenum2tofar', this.cnumbers2)
+				this.cnumbers1 = this.cnumbers2 / 100
+				this.$emit('changenum1tofar', this.cnumbers1)
+			}
+		},
+	}
+
+  const app = new Vue({
+    el: '#app',
+    data:{
+        num1: 0,
+        num2: 1
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      },
+			changenum1tofar(param){
+				this.num1 = param
+			},
+			changenum2tofar(param){
+				this.num2 = param
+			}
+    },
+    components:{
+			cpn
+    }
+  })
+</script>  
+</body>
+</html>
