@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    <cpn></cpn>
+  </div>
+
+  <template id="soncpn">
+      <div>
+          <h2>我是子组件</h2>
+          <button @click="sonclick">子组件按钮</button>
+					<ccpn></ccpn>
+      </div>
+  </template>
+
+  <template id="grandsoncpn">
+    <div>
+        <h2>我是子-子的组件即孙组件</h2>
+        <button @click="grandsoncpnclick">孙组件按钮</button>
+    </div>
+</template>
+
+
+<script src="../../js/vue.js"></script>
+<script> 
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      }
+    },
+    components:{
+        cpn:{
+            template: "#soncpn",
+            methods: {
+                sonclick(){
+                    // 这里是 在子组件中打印的父组件的内容，发现是一个 vue 实例而不是一个 子组件对象
+                    console.log("this.$parent", this.$parent)
+                }
+            },
+            components:{
+                ccpn:{
+                    template: "#grandsoncpn",
+											methods: {
+											grandsoncpnclick(){
+													// 这里是 是在组件中打印其父组件（就是vue实例的子组件）的内容，发现是一个子组件对象不再是一个 vue 实例了
+													console.log("this.$parent", this.$parent)
+											}
+									},
+                },
+            }
+        }
+    }
+  })
+</script>  
+</body>
+</html>

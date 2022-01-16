@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    <cpn>
+        <i>我不是按钮哦，我是自定义i标签</i>
+    </cpn>
+    <cpn></cpn>
+    <cpn></cpn>
+    <cpn>
+        <!-- 如果一个插槽中自定义元素是多个，那么这一个插槽将会被多个元素全部替代 -->
+        <p>我不是按钮哦我是自定义标签的第1个</p>
+        <h3>我不是按钮哦我是自定义标签的第2个</h3>
+        <b>我不是按钮哦我是自定义标签的第3个</b>
+    </cpn>
+  </div>
+
+  <template id="mycpn">
+      <div>
+          <h2>我是子组件标题</h2>
+          <h4>我是内容哈哈哈哈</h4>
+          <!-- 针对子组件在不同的使用场景下希望又自定义内容就可以使用插槽 -->
+          <!-- 针对组件中出现的比较频繁的元素可以用 设置为slot标签的默认元素 -->
+          <slot><button>按钮</button></slot>
+      </div>
+  </templat e>
+
+<script src="../../js/vue.js"></script>
+<script> 
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      }
+    },
+    components:{
+        cpn:{
+            template : "#mycpn"
+        }
+    }
+  })
+</script>  
+</body>
+</html>

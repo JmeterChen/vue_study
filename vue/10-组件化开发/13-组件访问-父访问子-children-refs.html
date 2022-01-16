@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    <cpn1></cpn1>
+    <cpn1 ref="child2"></cpn1>
+    <cpn1 ref="child3"></cpn1>
+    <button @click=farclick>按钮</button>
+  </div>
+  <template id="mycpn1">
+      <div>
+          我是message
+      </div>
+  </template>
+
+<script src="../../js/vue.js"></script>
+<script> 
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      },
+      farclick(){
+          console.log("父组件的按钮被点击，想访问子组件中定义的方法！")
+        //   this.$children 中是把 所有子组件都放在一个数组中，通过索引去取对应的子组件
+          console.log("我们看看子组件中 $children 有些什么:", this.$children)
+        //   this.$refs 是把在使用子组件时加了 ref 属性的子组件放到一个对象中，以 key(ref的值) - value(子组件对象)的形式存放，若子组件没有加 ref属性则该对象中就不存在对应的数据
+          console.log("我们看看子组件中 $ref 有些什么:", this.$refs)
+        //   我们通常用 this.$refs 形式来完成  父组件直接调用子组件的操作
+        this.$refs.child3.childclikc()
+      }
+    },
+    components:{
+        cpn1:{
+            template: "#mycpn1",
+            methods: {
+                childclikc(){
+                    console.log("这是子组件中定义的点击方法！")
+                }
+            },
+        }
+    }
+  })
+</script>  
+</body>
+</html>

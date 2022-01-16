@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+    <cpn></cpn>
+    <!-- 需求是父组件改变 子组件中插槽默认的样式 无需列表 而是以*拼接的形式展示 clanguages 的每一项-->
+    <cpn>
+        <!-- vue 2.5.x的 版本及以下 这里的标签必须是template，后面版本可以随便写标签名了，为了兼顾版本，所以这里还是用的 template标签  -->
+        <template slot="slot2" slot-scope="slot">
+            <div>
+                <div style="color: red;">子组件中无序列表body已经被父组件重写啦，并且数据来源是子组件哦!</div>
+                {{slot.dlanguages.join(' * ')}}
+            </div>
+        </template>
+        <div slot="slot3">
+            <b>我是父组件中重写的组件的插槽页脚</b>
+        </div>
+    </cpn>
+  </div>
+
+  <template id="mycpn">
+      <div>
+        <slot name='slot1'>
+            <h2>我是子组件标题</h2>
+        </slot>
+        <!-- 下面这里通过 :dlanguages="clanguages" 的写法就把子组件中的内容传给父组件，父组件就可以通过 slot.dlanguages 拿到数据 -->
+        <slot name='slot2' :dlanguages="clanguages">
+            <ul>
+                <li v-for="item in clanguages">{{item}}</li>
+            </ul>
+        </slot>
+        <slot name='slot3'>
+            <h2>我是子组件页脚</h2>
+        </slot>
+      </div>
+  </template>
+
+<script src="../../js/vue.js"></script>
+<script> 
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      }
+    },
+    components:{
+        cpn:{
+            template: "#mycpn",
+            data(){
+            return{
+                clanguages: ["JavaScript", "Java", "Python", "swift", "golang"]
+            }
+        }
+        },
+    }
+  })
+</script>  
+</body>
+</html>

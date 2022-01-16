@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <div id='app'>
+      <h2>我是父组件</h2>
+    <cpn>
+        <div slot="slot2">
+            <p>父组件中使用自定义内容替换子组件插槽中默认元素</p>
+            <button>按钮</button>
+        </div>
+    </cpn>
+  </div>
+
+  <template id="mycpn">
+      <div>
+          <h2>我是子组件标题</h2>
+          <!-- 这里给每个插槽设置name 属性后，name自定义内容时可以指定具体的插槽 -->
+          <slot name="slot1"><p>插槽默认元素1</p></slot>
+          <slot name="slot2"><p>插槽默认元素2</p></slot>
+          <slot name="slot3"><p>插槽默认元素3</p></slot>
+      </div>
+  </template>
+
+<script src="../../js/vue.js"></script>
+<script> 
+  const app = new Vue({
+    el: '#app',
+    data:{
+      message:"hello, world!",
+      firstName: 'Kobe',
+      lastName: 'Bryant',
+      counter: 100
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      }
+    },
+    components:{
+        cpn:{
+            template: "#mycpn"
+        }
+    }
+  })
+</script>  
+</body>
+</html>
