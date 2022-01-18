@@ -1,4 +1,17 @@
 
+#### 2022-1-18  webpack 学习
+- 了解 commonJS 和 ES6  的模块导出和导入
+- 认识开发前端使用模块化思想
+- 认识 webpack 编译js 文件机制
+- 学习 npm run `xxxx` 命令的实质
+  - 使用  `npm run build` 替代 `webpack` 命令编译
+  - 直接`webpack`命令使用的是全局安装的，使用npm 替代命令使用的是局部安装的，了解不同点
+- css 模块话 使用loader 加载器的引入
+
+- 开发时依赖安装，不同版本的安装包
+`npm install webpack@3.6.0 --save-dev`
+
+
 #### 2022-1-15  组件化开发学习3
 - 父子组件的通信复杂案例
   - 实现思路及要点：
