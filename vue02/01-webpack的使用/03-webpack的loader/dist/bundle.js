@@ -57,7 +57,7 @@
 /******/ 	__webpack_require__.o = function(object, property) { return Object.prototype.hasOwnProperty.call(object, property); };
 /******/
 /******/ 	// __webpack_public_path__
-/******/ 	__webpack_require__.p = "";
+/******/ 	__webpack_require__.p = "dist/";
 /******/
 /******/ 	// Load entry module and return exports
 /******/ 	return __webpack_require__(__webpack_require__.s = 2);
@@ -224,7 +224,7 @@ var singleton = null;
 var	singletonCounter = 0;
 var	stylesInsertedAtTop = [];
 
-var	fixUrls = __webpack_require__(7);
+var	fixUrls = __webpack_require__(9);
 
 module.exports = function(list, options) {
 	if (typeof DEBUG !== "undefined" && DEBUG) {
@@ -583,7 +583,7 @@ const {add, mult} = __webpack_require__(3)
 __webpack_require__(5)
 
 // 4. 引入依赖的 less 文件
-__webpack_require__(8) 
+__webpack_require__(10) 
 
 console.log("这里是main.js文件")
 console.log('add:', add(100, 300))
@@ -691,13 +691,49 @@ if(false) {
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
+// Imports
+var urlEscape = __webpack_require__(7);
+var ___CSS_LOADER_URL___0___ = urlEscape(__webpack_require__(8));
+
 // Module
-exports.push([module.i, "body {\n    background-color: red;\n}", ""]);
+exports.push([module.i, "body {\n    /* background-color: red; */\n    background: url(" + ___CSS_LOADER_URL___0___ + ");\n}", ""]);
 
 
 
 /***/ }),
 /* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+module.exports = function escape(url, needQuotes) {
+  if (typeof url !== 'string') {
+    return url;
+  } // If url is already wrapped in quotes, remove them
+
+
+  if (/^['"].*['"]$/.test(url)) {
+    url = url.slice(1, -1);
+  } // Should url be wrapped?
+  // See https://drafts.csswg.org/css-values-3/#urls
+
+
+  if (/["'() \t\n]/.test(url) || needQuotes) {
+    return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"';
+  }
+
+  return url;
+};
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "img/big.6c82e04c.png";
+
+/***/ }),
+/* 9 */
 /***/ (function(module, exports) {
 
 
@@ -792,11 +828,11 @@ module.exports = function (css) {
 
 
 /***/ }),
-/* 8 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 
-var content = __webpack_require__(9);
+var content = __webpack_require__(11);
 
 if(typeof content === 'string') content = [[module.i, content, '']];
 
@@ -842,12 +878,12 @@ if(false) {
 }
 
 /***/ }),
-/* 9 */
+/* 11 */
 /***/ (function(module, exports, __webpack_require__) {
 
 exports = module.exports = __webpack_require__(0)(false);
 // Module
-exports.push([module.i, "body {\n  font-size: 50 px;\n  color: orange;\n}\n", ""]);
+exports.push([module.i, "body {\n  font-size: 50px;\n  color: orange;\n}\n", ""]);
 
 
 

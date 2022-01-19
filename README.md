@@ -1,6 +1,21 @@
+#### 2022-1-19 webpack 学习
+- `css-loader` 的引入学习
+- `less-loader` 的引入学习
+  - 这里需要注意的是 安装的时候需要安装  `less-loader` 和 `less` 两个模块
+- 为了支持编译 image，学了 引入 `url-loader` 和 `file-loader`
+  - `url-loader` 使用中 limit 的意义
+  1.当图片的大小比 limit 的数值小，则图片会被编译成一个`base64`的字符串被引用；
+  2.当图片的大小比 limit 的数值大时，则需要使用 `file-loader` 来进行编译加载
+  - `file-loader` 的使用
+    1.它会将图片复制然后以hash64算法生成的字符串命名(为了避免重复)新图片保存到 dist 文件夹下
+    2.但是发现图片无法正常被加载使用，此时需要在 `webpack.config.js`文件中 output 属性加上声明规则 `publicPath: 'dist'`
+      - `publicPath: 'dist'` 的作用是 所有静态文件是以 url 形式引入的打包后生成的文件被引入时前面都会加上 dist；
+    3.当项目中的图片很多时，为了方便管理，我们希望打包生成的图片存放在一个文件夹中
+      - 为了避免重复且方便管理 我们定义个生成图片的规则 `img/name.hash.ext`
+      写法：`"img/[name].[hash:8].[ext]"`
 
 #### 2022-1-18  webpack 学习
-- 了解 commonJS 和 ES6  的模块导出和导入
+- 了解 `commonJS` 和 `ES6` 的模块导出和导入
 - 认识开发前端使用模块化思想
 - 认识 webpack 编译js 文件机制
 - 学习 npm run `xxxx` 命令的实质
