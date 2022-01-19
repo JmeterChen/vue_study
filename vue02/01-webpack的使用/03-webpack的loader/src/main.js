@@ -13,6 +13,9 @@ import {name, age, height} from './js/info'
 // 3.依赖 css 文件
 require('./css/normal.css')
 
+// 4. 引入依赖的 less 文件
+require('./css/special.less') 
+
 console.log("这里是main.js文件")
 console.log('add:', add(100, 300))
 console.log('mult:', mult(20, 30))
