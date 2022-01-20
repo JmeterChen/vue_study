@@ -1,3 +1,20 @@
+#### 2022-1-20 webpack 学习
+- `babel-loader` 的引入学习
+  - 把最终编译生成的 js 文件中的语法统一为 ES5 的语法
+- wabpack 中引入 vue
+  - vue 的npm方式安装 `npm install vue --save`,这里安装 vue 并不是开发时依赖
+  - vue 被引入后 直接使用 vue 实例，会发现报错，需要在 webpack.config.js 中定义申明 
+  ```
+    resolve:{
+      alias:{ // 别名
+        'vue$': 'vue/dist/vue.esm.js'
+      }
+    }
+  ```
+  - 创建 Vue是 template 和 el 的关系
+    1. 一般 index.html 文件是不会更改的，只用 body 中的挂载元素指定 vue 实例就ok了
+    2. 然后编译时 vue框架会把 vue 实例中纯手敲（后面明显需要抽离的）的 template 元素 替换调挂载vue实例整个元素
+    
 #### 2022-1-19 webpack 学习
 - `css-loader` 的引入学习
 - `less-loader` 的引入学习
@@ -25,7 +42,6 @@
 
 - 开发时依赖安装，不同版本的安装包
 `npm install webpack@3.6.0 --save-dev`
-
 
 #### 2022-1-15  组件化开发学习3
 - 父子组件的通信复杂案例

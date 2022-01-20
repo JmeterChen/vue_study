@@ -58,10 +58,15 @@ module.exports = {
               use: {
                 loader: 'babel-loader',
                 options: {
-                  presets: ['es2015']   // 这里和官方文档描述的有出入，需要修改下
+                  presets: ['es2015']   // 
                 }
               }
             }
           ],
+    },
+    resolve:{
+      alias:{ // 别名
+        'vue$': 'vue/dist/vue.esm.js'
+      }
     }
 }

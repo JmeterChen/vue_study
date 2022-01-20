@@ -562,79 +562,71 @@ function updateLink (link, options, obj) {
 
 /***/ }),
 /* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__js_info__ = __webpack_require__(4);
+
+
+var _info = __webpack_require__(3);
 
 // 这里是用的 commonJS 的模块导入写法
-const {add, mult} = __webpack_require__(3)
-
+var _require = __webpack_require__(4),
+    add = _require.add,
+    mult = _require.mult;
 
 // 这里是用的 ES6 的模块导入写法
-
 
 
 // 这里直接引入css模块， 使用webpack命令编译时会报错
 // error: You may need an appropriate loader to handle this file type.
 // 需要选择一个 支持 css加载的 loader: css-loader
 // 3.依赖 css 文件
-__webpack_require__(5)
+__webpack_require__(5);
 
 // 4. 引入依赖的 less 文件
-__webpack_require__(10) 
+__webpack_require__(10);
 
-console.log("这里是main.js文件")
-console.log('add:', add(100, 300))
-console.log('mult:', mult(20, 30))
+console.log("这里是main.js文件");
+console.log('add:', add(100, 300));
+console.log('mult:', mult(20, 30));
 
-console.log("name:", __WEBPACK_IMPORTED_MODULE_0__js_info__["c" /* name */])
-console.log("age:", __WEBPACK_IMPORTED_MODULE_0__js_info__["a" /* age */])
-console.log("height:", __WEBPACK_IMPORTED_MODULE_0__js_info__["b" /* height */])
-
+console.log("name:", _info.name);
+console.log("age:", _info.age);
+console.log("height:", _info.height);
 
 /***/ }),
 /* 3 */
-/***/ (function(module, exports) {
-
-
-
-function add(num1, num2){
-    return num1 + num2
-}
-
-
-function mult(num1, num2){
-    return num1 * num2
-}
-
-module.exports = {
-    add,
-    mult
-}
-
-
-
-
-
-/***/ }),
-/* 4 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
+/***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
-const name = "kobe"
-/* harmony export (immutable) */ __webpack_exports__["c"] = name;
 
-const age = 18
-/* harmony export (immutable) */ __webpack_exports__["a"] = age;
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+var name = exports.name = "kobe";
+var age = exports.age = 18;
+var height = exports.height = "1.88M";
 
-const height = "1.88M"
-/* harmony export (immutable) */ __webpack_exports__["b"] = height;
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
 
 
+function add(num1, num2) {
+    return num1 + num2;
+}
 
+function mult(num1, num2) {
+    return num1 * num2;
+}
+
+module.exports = {
+    add: add,
+    mult: mult
+};
 
 /***/ }),
 /* 5 */
@@ -707,7 +699,7 @@ exports.push([module.i, "body {\n    /* background-color: red; */\n    backgroun
 "use strict";
 
 
-module.exports = function escape(url, needQuotes) {
+module.exports = function escape(url) {
   if (typeof url !== 'string') {
     return url;
   } // If url is already wrapped in quotes, remove them
@@ -719,7 +711,7 @@ module.exports = function escape(url, needQuotes) {
   // See https://drafts.csswg.org/css-values-3/#urls
 
 
-  if (/["'() \t\n]/.test(url) || needQuotes) {
+  if (/["'() \t\n]/.test(url)) {
     return '"' + url.replace(/"/g, '\\"').replace(/\n/g, '\\n') + '"';
   }
 
