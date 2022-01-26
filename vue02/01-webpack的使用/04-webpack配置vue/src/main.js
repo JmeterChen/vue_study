@@ -83,13 +83,26 @@ import Vue from 'vue'
 //     },
 // }
 
-// 版本3： 在 src 文件夹下创建 vue文件夹，然后把刚才写的组件 全部剪切到 vue创建 app.js文件中声明导出
-import cpn from '../src/vue/app'
+// // 版本3： 在 src 文件夹下创建 vue文件夹，然后把刚才写的组件 全部剪切到 vue创建 app.js文件中声明导出
+// import cpn from '../src/vue/app'
+
+// new Vue({
+//     el:"#app",
+//     template: '<cpn/>',
+//     components:{
+//         cpn
+//     }
+// })
+
+
+// 版本4： 把抽离出去的组件从js 文件中改写到 vue文件中 并且保证了 元素与数据分离，便于维护
+
+import App from './vue/App.vue'
 
 new Vue({
     el:"#app",
-    template: '<cpn/>',
+    template: '<App/>',
     components:{
-        cpn
+        App
     }
 })

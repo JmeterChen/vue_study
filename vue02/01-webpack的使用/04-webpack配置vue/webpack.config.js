@@ -61,6 +61,10 @@ module.exports = {
                   presets: ['es2015']   // 
                 }
               }
+            },
+            {
+              test: /\.vue$/, 
+              use: ['vue-loader']
             }
           ],
     },
