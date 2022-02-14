@@ -1,4 +1,3 @@
-
 // 这里是用的 commonJS 的模块导入写法
 const {add, mult} = require("./js/app")
 
@@ -14,7 +13,7 @@ import {name, age, height} from './js/info'
 require('./css/normal.css')
 
 // 4. 引入依赖的 less 文件
-require('./css/special.less') 
+require('./css/special.less')
 
 console.log("这里是main.js文件")
 console.log('add:', add(100, 300))
@@ -100,9 +99,9 @@ import Vue from 'vue'
 import App from './vue/App.vue'
 
 new Vue({
-    el:"#app",
+    el: "#app",
     template: '<App/>',
-    components:{
+    components: {
         App
     }
 })

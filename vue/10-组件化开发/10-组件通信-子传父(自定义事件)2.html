@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+
+  <!-- 父组件模板 -->
+  <div id='app'>
+    <mycpn @tofartherclick="fartherclick" :child2catagorys='catagorys'></mycpn>
+  </div>
+
+  <!--子组件模板 -->
+  <template id="cpnn">
+    <div>
+      <button v-for="item in childcatagorys" @click="itemclick(item)">{{item.name}}</button>
+    </div>
+  </template>
+
+<script src="../../js/vue.js"></script>
+<script> 
+
+  const mycpn = {
+    template: "#cpnn",
+    props: {
+        child2catagorys:{
+            type:Array
+        }
+    },
+    data(){
+      return {
+        childcatagorys: this.child2catagorys
+      }
+    },
+    methods:{
+      itemclick(item){
+        console.log("itemclick:", item)
+        // 发射事件：自定义事件
+        this.$emit("tofartherclick", item)
+      }
+    }
+  }
+
+  const app = new Vue({
+    el: '#app',
+    data:{
+        catagorys: [
+          {id:1, name: "数码科技"},
+          {id:2, name: "海鲜水果"},
+          {id:3, name: "家用家电"},
+          {id:4, name: "厨房厨具"},
+        ]
+    },
+    methods:{
+      test(){
+        console.log("test_log!")
+      },
+      fartherclick(farItem){
+        console.log("tofartherclick:", farItem, farItem.id, farItem.name)
+      }
+    },
+    components:{
+      mycpn
+    }
+  })
+</script>  
+</body>
+</html>
