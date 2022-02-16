@@ -1,3 +1,148 @@
+
+
+#### 2022-2-16 webpack学习 
+##### 1.`webpack-dev-server`
+
+使用步骤：
+1. 安装与 `webpack` 版本对应的 `webpack-dev-server`；
+
+```
+// 这里 webpack 的版本是 "webpack": "^3.6.0"
+npm install webpack-dev-server@2.9.3  --save-dev
+```
+
+2. 配置 `webpack-dev-server` 相关参数
+
+
+```
+// webpack.config.js
+
+module.exports = {
+    entry: "./src/main.js",
+    output: {...},
+    module: {...}, 
+    resolve: {...},
+    plugins: [...],
+    devServer:{
+        // 作用是本地起一个服务，上线前是需要注释的 
+        contentBase: "./dist",  // 指定服务启动的时候根路径
+        inline: true,           // 是否需要实时刷新
+        port: 9988              // 服务启动的端口，不指定时默认为8000
+    }
+}
+```
+
+3. 设置快捷启动命令
+
+```
+// package.json
+...
+  "scripts": {
+    ...
+    "dev": "webpack-dev-server  --open" // 这里使用 --open参数可以在启动后立马在浏览器打开
+  },
+...
+```
+
+
+
+##### 2. `webpack.config.js` 文件的分离
+背景：因为 `webpack.config.js` 未区分环境，包括本地环境或开发环境或生产环境，所以 未分离前可能就是各种配置的集合，一个文件中存在各种环境的配置不偏于维护，所以就可以考虑把公共部分提取放在一个基础文件中，其他环境的定制化配置单独用一个文件维护；
+
+###### 1.文件拆分
+`webpack.config.js` 内容被拆分为以下三个文件：
+1. `base.config.js`     -- 存放配置文件中公共部分的内容
+2. `dev.config.js`      -- 存放开发环境中定制化配置内容
+3. `prod.config.js`     -- 存放生产环境中定制化配置内容
+
+###### 2. 安装 `webpack-merge` 
+```
+npm install webpack-merge@4.1.5 --save-dev
+```
+###### 3. 定制化配制文件中 引入基础配置文件
+- prod.config.js
+```
+// prod.config.js
+const webpakcMerge = require('webpack-merge')
+const baseConfig = require('./base.config')
+const UglifyjsWebpackPlugin = require('uglifyjs-webpack-plugin')
+
+module.exports = webpakcMerge(baseConfig, {
+    plugins:[
+        // 这个插件的功能是把自动生成的js进行压缩，没必要的字符以及空格都会被删除,一般用于生产环境
+        new UglifyjsWebpackPlugin()
+      ],
+})
+```
+- dev.config.js
+
+```
+const webpakcMerge = require('webpack-merge')
+const baseConfig = require('./base.config')
+
+module.exports = webpakcMerge(baseConfig, {
+    devServer:{
+        contentBase: "./dist",
+        inline: true
+      }
+})
+```
+
+截止到此时，对于`webpack.config.js` 文件的分离任务已经完成的差不多了，可以删除原先的 `webpack.config.js` 文件；
+删除完成后执行 `npm run buil` 命令发现会报错；
+
+###### 4. 还需要修改打包命令
+添加如下参数：
+
+```
+// package.json
+...
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "webpack --config ./build/prod.config.js",
+    "dev": "webpack-dev-server  --open --config ./build/dev.config.js"
+  },
+...
+```
+
+但是执行打包时，生成的 `dist` 文件夹会存放在`build`文件夹下，所以还需要更改一个配置
+原因是 `base.config.js` 文件中之前有加参数指定 dist 的生成路径，所以还需要更改下原先的路径配置
+
+改之前：
+```
+// base.config.js
+...
+module.exports = {
+    entry: "./src/main.js",
+    output: {
+        // 这里需要使用绝对路径，并且是希望动态的
+        path: path.resolve(__dirname, "dist"),
+        filename: "bundle.js",
+        // publicPath: "dist/"  // 这里的配置的作用是 打包的时候所有 以url方式引入的 静态文件再次生成后的路径被引入时会加上该路径
+    },
+    ...
+}
+```
+改之后：
+
+```
+// base.config.js
+...
+module.exports = {
+    entry: "./src/main.js",
+    output: {
+        // 这里需要使用绝对路径，并且是希望动态的
+        path: path.resolve(__dirname, "../dist"),
+        filename: "bundle.js",
+        // publicPath: "dist/"  // 这里的配置的作用是 打包的时候所有 以url方式引入的 静态文件再次生成后的路径被引入时会加上该路径
+    },
+    ...
+}
+```
+
+
+
+
 #### 2022-1-20 webpack 学习
 - `babel-loader` 的引入学习
   - 把最终编译生成的 js 文件中的语法统一为 ES5 的语法
