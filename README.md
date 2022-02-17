@@ -1,4 +1,29 @@
 
+#### 2022-2-17 vue-cli 脚手架学习
+##### 1.安装vue脚手架
+
+```
+npm install  @vue/cli -g
+```
+备注：这里默认安装的是 vue 脚手架3，但是之前还有一些项目是脚手架2，所以我们希望同时支持两种版本
+
+##### 2.拉取 vue-cli2的模板代码
+[学习地址](https://cli.vuejs.org/zh/guide/creating-a-project.html#%E6%8B%89%E5%8F%96-2-x-%E6%A8%A1%E6%9D%BF-%E6%97%A7%E7%89%88%E6%9C%AC)
+
+```
+npm install -g @vue/cli-init
+# `vue init` 的运行效果将会跟 `vue-cli@2.x` 相同
+```
+
+##### 3.到指定路径创建项目
+
+```
+// vue-cli2 创建项目
+vue init webpack my-project
+// vue-cli3 创建项目
+vue add 
+```
+
 
 #### 2022-2-16 webpack学习 
 ##### 1.`webpack-dev-server`
